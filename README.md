@@ -1,4 +1,5 @@
-# Vesta AI Companion - Hackathon Build
+# A.L.L.Y - Assistive Language Life support for You
+## Vesta AI Companion - Hackathon Build
 
 An empathetic AI companion designed to provide ambient companionship and intelligent safety net for elderly people living independently.
 
@@ -24,35 +25,35 @@ An empathetic AI companion designed to provide ambient companionship and intelli
 ```bash
 cd backend
 pip install -r requirements.txt
-cp .env.example .env
+cp .env-template .env
 # Edit .env with your API keys
 python app.py
 ```
 
 ### 2. Frontend Setup
 
-Simply open `frontend/index.html` in a modern web browser, or serve it with a local web server:
+Simply open `frontend/login.html` in a modern web browser, or serve it with a local web server:
 
 ```bash
 cd frontend
 python -m http.server 8000
-# Open http://localhost:8000
+# Open http://localhost:8000/login.html
 ```
 
-### 3. Configuration
+### 3. Demo Flow
 
-1. Click "⚙️ Configure Vesta" in the UI
-2. Fill in user information and emergency contact
-3. Set up medication reminders
-4. Save configuration
-5. Return to main interface and click "Start Companion"
+1. **Login**: Start at `login.html` with beautiful UI and brand identity
+2. **Configuration**: Set up user information and emergency contact
+3. **Live Companion**: Experience the animated sphere and voice interaction
+4. **Emergency Test**: Demonstrate real-world phone call capability
 
 ## 🏗️ Architecture
 
 ### Frontend (`/frontend`)
 - **Vanilla HTML/CSS/JS** for maximum compatibility and speed
 - **Web Speech API** for voice recognition
-- **Clean split-screen UI** with animated Vesta sphere
+- **Minimal monochrome design** with violet brand accents
+- **Inter typography** at 28px/24px/20px hierarchy
 - **Real-time conversation log** showing all interactions
 
 ### Backend (`/backend`)
@@ -104,10 +105,18 @@ ngrok http 5000
 
 ## 🎬 Demo Script (90 seconds)
 
-1. **Setup (15s)**: Show configuration page, explain personalization
-2. **Proactive Chat (30s)**: Demonstrate AI initiating conversation
-3. **User Interaction (30s)**: Show voice/text interaction with personality
-4. **Emergency Demo (15s)**: Trigger emergency, show real phone call
+1. **Login (15s)**: Show beautiful login page with imagery
+2. **Setup (15s)**: Quick configuration with personalization
+3. **Proactive Chat (30s)**: Demonstrate AI initiating conversation
+4. **User Interaction (15s)**: Show voice/text interaction
+5. **Emergency Demo (15s)**: Trigger emergency, show real phone call
+
+## 🎨 Design System
+
+- **Typography**: Inter font with 28px H1, 24px H2, 20px body text
+- **Colors**: Monochrome base with violet accents (#61459e, #a78cde)
+- **Logo**: Instrument Serif "ALLY" wordmark
+- **Layout**: Minimal, professional, trustworthy aesthetic
 
 ## 🔮 Future Enhancements
 
