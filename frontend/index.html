@@ -7,64 +7,106 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #ffffff;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .page-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #111111;
+            letter-spacing: -0.02em;
+            margin: 40px 20px 20px 20px;
+            text-align: center;
+        }
+        
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .widget-container {
+            width: 100%;
+            max-width: 600px;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #elevenlabs-widget-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .widget-loading {
+            text-align: center;
+            color: #6b6b6b;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        
+        .widget-loading p {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .loading-subtitle {
+            font-size: 14px !important;
+            font-weight: 400 !important;
+            margin-top: 8px !important;
+            opacity: 0.7;
+        }
+        
+        .convai-widget.embedded {
+            position: relative !important;
+            width: 100% !important;
+            height: 100% !important;
+            max-width: none !important;
+            max-height: none !important;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .convai-widget.embedded elevenlabs-convai {
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <h1>Vesta AI Companion</h1>
-            <div class="status-indicator" id="statusIndicator">
-                <span class="status-dot"></span>
-                <span id="statusText">Listening...</span>
-            </div>
-        </header>
-
-        <!-- Main Content - Split Screen -->
-        <main class="main-content">
-            <!-- Left Side - Animated Sphere -->
-            <div class="companion-section">
-                <div class="vesta-sphere" id="vestaSphere">
-                    <div class="sphere-inner"></div>
-                    <div class="pulse-ring"></div>
-                </div>
-                <div class="companion-controls">
-                    <button id="startBtn" class="control-btn primary">Start Companion</button>
-                    <button id="stopBtn" class="control-btn secondary" disabled>Stop</button>
-                    <button id="emergencyBtn" class="control-btn emergency">Emergency Test</button>
+    <h1 class="page-title">Companion Mode for Vesta AI</h1>
+    <div class="content-wrapper">
+        <div class="widget-container">
+            <div id="elevenlabs-widget-container">
+                <div id="widget-loading" class="widget-loading">
+                    <p>Loading ElevenLabs AI Assistant...</p>
+                    <p class="loading-subtitle">Initializing voice interface</p>
                 </div>
             </div>
-
-            <!-- Right Side - Conversation Log -->
-            <div class="log-section">
-                <div class="log-header">
-                    <h2>Conversation & Activity Log</h2>
-                    <button id="clearLogBtn" class="control-btn small">Clear Log</button>
-                </div>
-                <div class="conversation-log" id="conversationLog">
-                    <div class="log-entry system">
-                        <span class="timestamp">System</span>
-                        <span class="message">Vesta initialized. Waiting to start...</span>
-                    </div>
-                </div>
-                <div class="input-section">
-                    <input type="text" id="textInput" placeholder="Type a message or use voice..." disabled>
-                    <button id="sendBtn" class="control-btn" disabled>Send</button>
-                </div>
-            </div>
-        </main>
-
-        <!-- Configuration Link -->
-        <footer class="footer">
-            <a href="config.html" class="config-link">Configure</a>
-        </footer>
+        </div>
     </div>
 
-    <!-- Audio element for playback -->
-    <audio id="audioPlayer" preload="auto"></audio>
-
-    <!-- Scripts -->
-    <script src="js/api.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/test.js"></script>
 </body>
 </html>

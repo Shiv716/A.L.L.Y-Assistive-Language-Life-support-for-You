@@ -630,6 +630,58 @@ async def get_models():
     }
 
 
+@app.get("/elevenlabs/conversation/{conversation_id}")
+async def get_elevenlabs_conversation(conversation_id: str):
+    """Fetch conversation transcript from ElevenLabs API"""
+    try:
+        if not config.ELEVENLABS_API_KEY:
+            raise HTTPException(status_code=500, detail="ElevenLabs API key not configured")
+        
+        headers = {
+            "xi-api-key": config.ELEVENLABS_API_KEY,
+            "Content-Type": "application/json"
+        }
+        
+        # Make request to ElevenLabs API
+        url = f"https://api.elevenlabs.io/v1/convai/conversations/{conversation_id}"
+        response = requests.get(url, headers=headers)
+        
+        if response.status_code == 200:
+            conversation_data = response.json()
+            
+            # Extract and format transcript
+            transcript = conversation_data.get('transcript', [])
+            formatted_transcript = []
+            
+            for entry in transcript:
+                formatted_transcript.append({
+                    "role": entry.get('role', 'unknown'),
+                    "message": entry.get('message', ''),
+                    "timestamp": entry.get('time_in_call_secs', 0)
+                })
+            
+            return {
+                "success": True,
+                "conversation_id": conversation_id,
+                "status": conversation_data.get('status', 'unknown'),
+                "transcript": formatted_transcript,
+                "agent_id": conversation_data.get('agent_id', '')
+            }
+        else:
+            logger.error(f"ElevenLabs API error: {response.status_code} - {response.text}")
+            raise HTTPException(
+                status_code=response.status_code, 
+                detail=f"ElevenLabs API error: {response.text}"
+            )
+            
+    except requests.RequestException as e:
+        logger.error(f"Request error: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Request error: {str(e)}")
+    except Exception as e:
+        logger.error(f"Error fetching conversation: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching conversation: {str(e)}")
+
+
 @app.on_event("startup")
 async def startup_event():
     """Initialize on startup"""

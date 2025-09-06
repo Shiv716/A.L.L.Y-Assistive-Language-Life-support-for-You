@@ -5,7 +5,7 @@
 
 class VestaAPI {
     constructor() {
-        this.baseUrl = 'http://localhost:5000'; // Flask backend URL
+        this.baseUrl = 'http://localhost:8001'; // Live backend URL (FastAPI + ElevenLabs)
         this.isPolling = false;
         this.pollingInterval = null;
     }
