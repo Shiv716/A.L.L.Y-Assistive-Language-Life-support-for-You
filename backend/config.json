@@ -1,0 +1,19 @@
+{
+  "userName": "John",
+  "emergencyContact": {
+    "name": "Sarah",
+    "number": "+447911123456"
+  },
+  "context": "John is a former RAF pilot and loves stories about WW2 spitfires. He can be forgetful but enjoys classical music and talking about his flying days.",
+  "reminders": [
+    {
+      "time": "09:00",
+      "task": "Take your Amlodipine (heart pills)"
+    },
+    {
+      "time": "20:00",
+      "task": "Take your Amlodipine (heart pills)"
+    }
+  ],
+  "checkInFrequency": 30
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configure Vesta - AI Care Companion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/config.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Configure Your Vesta Companion</h1>
+            <p class="subtitle">Set up personalized care for your loved one</p>
+        </header>
+
+        <main class="config-form">
+            <form id="configForm">
+                <!-- User Information -->
+                <section class="form-section">
+                    <h2>👤 User Information</h2>
+                    <div class="form-group">
+                        <label for="userName">Name of the person Vesta will care for:</label>
+                        <input type="text" id="userName" name="userName" required placeholder="e.g., John">
+                    </div>
+                    <div class="form-group">
+                        <label for="context">Personal context (interests, background, personality):</label>
+                        <textarea id="context" name="context" rows="4" required 
+                                placeholder="e.g., John is a former RAF pilot and loves stories about WW2 spitfires. He can be forgetful but enjoys classical music."></textarea>
+                    </div>
+                </section>
+
+                <!-- Emergency Contact -->
+                <section class="form-section">
+                    <h2>🚨 Emergency Contact</h2>
+                    <div class="form-group">
+                        <label for="emergencyName">Emergency contact name:</label>
+                        <input type="text" id="emergencyName" name="emergencyName" required placeholder="e.g., Sarah">
+                    </div>
+                    <div class="form-group">
+                        <label for="emergencyNumber">Emergency contact phone number:</label>
+                        <input type="tel" id="emergencyNumber" name="emergencyNumber" required 
+                               placeholder="e.g., +447911123456">
+                    </div>
+                </section>
+
+                <!-- Reminders -->
+                <section class="form-section">
+                    <h2>💊 Medication Reminders</h2>
+                    <div id="remindersContainer">
+                        <div class="reminder-item">
+                            <div class="form-group">
+                                <label>Time:</label>
+                                <input type="time" name="reminderTime" value="09:00">
+                            </div>
+                            <div class="form-group">
+                                <label>Medication/Task:</label>
+                                <input type="text" name="reminderTask" placeholder="e.g., Take your Amlodipine (heart pills)">
+                            </div>
+                            <button type="button" class="remove-reminder">Remove</button>
+                        </div>
+                    </div>
+                    <button type="button" id="addReminderBtn" class="control-btn secondary">Add Another Reminder</button>
+                </section>
+
+                <!-- Check-in Frequency -->
+                <section class="form-section">
+                    <h2>⏰ Check-in Settings</h2>
+                    <div class="form-group">
+                        <label for="checkInFrequency">How often should Vesta proactively check in? (minutes)</label>
+                        <select id="checkInFrequency" name="checkInFrequency">
+                            <option value="15">Every 15 minutes</option>
+                            <option value="30" selected>Every 30 minutes</option>
+                            <option value="60">Every hour</option>
+                            <option value="120">Every 2 hours</option>
+                        </select>
+                    </div>
+                </section>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="submit" class="control-btn primary">Save Configuration</button>
+                    <a href="index.html" class="control-btn secondary">Back to Companion</a>
+                </div>
+            </form>
+        </main>
+
+        <div id="saveStatus" class="save-status"></div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/config.js"></script>
+</body>
+</html>

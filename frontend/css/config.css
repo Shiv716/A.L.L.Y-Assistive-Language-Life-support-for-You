@@ -1,0 +1,77 @@
+/* Vesta Configuration — Minimal Monochrome */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --bg: #ffffff;
+    --bg-muted: #f7f7f7;
+    --text: #111111;
+    --text-muted: #6b6b6b;
+    --border: #e6e6e6;
+    --accent: #61459e;
+    --accent-light: #a78cde;
+}
+  --bg: #ffffff;
+  --bg-muted: #f7f7f7;
+  --text: #111111;
+  --text-muted: #6b6b6b;
+  --border: #e6e6e6;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.container { max-width: 760px; margin: 0 auto; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+
+/* Header */
+.header { padding: 28px 24px; border-bottom: 1px solid var(--border); text-align: left; }
+.header h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 6px; font-family: 'Inter', sans-serif; }
+.subtitle { font-size: 20px; color: var(--text-muted); font-family: 'Inter', sans-serif; }
+
+/* Form */
+.config-form { padding: 24px; }
+.form-section { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+.form-section:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.form-section h2 { font-size: 24px; font-weight: 600; margin-bottom: 16px; color: var(--text); font-family: 'Inter', sans-serif; }
+
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--text); font-size: 20px; font-family: 'Inter', sans-serif; }
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 20px; outline: none; background: var(--bg); font-family: 'Inter', sans-serif;
+}
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: #b3b3b3; }
+
+/* Reminder Items */
+.reminder-item { background: var(--bg-muted); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-bottom: 12px; display: grid; grid-template-columns: 1fr 2fr auto; gap: 12px; align-items: end; }
+.reminder-item .form-group { margin-bottom: 0; }
+.remove-reminder { padding: 8px 12px; background: #111; color: #fff; border: 1px solid #111; border-radius: 8px; cursor: pointer; font-size: 20px; font-family: 'Inter', sans-serif; }
+
+/* Buttons */
+.control-btn { padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text); font-size: 20px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; }
+.control-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.control-btn.secondary { }
+.control-btn:hover { background: var(--bg-muted); }
+
+/* Actions */
+.form-actions { display: flex; gap: 10px; justify-content: center; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); }
+
+/* Save Status */
+.save-status { position: fixed; top: 20px; right: 20px; padding: 12px 16px; border-radius: 8px; font-weight: 500; transform: translateX(400px); transition: transform .25s ease; z-index: 1000; border: 1px solid var(--border); background: var(--bg); font-size: 20px; font-family: 'Inter', sans-serif; }
+.save-status.show { transform: translateX(0); }
+.save-status.success { border-color: #b3b3b3; }
+.save-status.error { border-color: #b3b3b3; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container { border-radius: 10px; }
+  .config-form { padding: 20px; }
+  .reminder-item { grid-template-columns: 1fr; }
+  .form-actions { flex-direction: column; }
+  .control-btn { width: 100%; }
+}
