@@ -1,12 +1,43 @@
 // ============================================================================
-// ELEVENLABS CONVAI WIDGET SETUP
+// ELEVENLABS CONVAI WIDGET SETUP - MULTI-AGENT DEMO
 // ============================================================================
 // 
-// CHANGE THESE VALUES FOR YOUR SITE:
+// DYNAMIC AGENT CONFIGURATION BASED ON URL PARAMETERS
 // ============================================================================
 
-// REQUIRED: Replace with your ElevenLabs agent ID
-const AGENT_ID = 'agent_7401k4g1r9m7fsh9xpg0a5zn8h1w';
+// Agent configurations for different demo flows
+const AGENT_CONFIGS = {
+  'flow1': {
+    id: 'agent_7401k4g1r9m7fsh9xpg0a5zn8h1w',
+    title: 'Flow 1: energetic good morning',
+    description: 'Energetic morning companion to start the day'
+  },
+  'flow2': {
+    id: 'agent_0201k4f0z28heg7t3zs2yw3mqbqv',
+    title: 'Flow 2: keeping user mentally engaged',
+    description: 'Engaging companion for mental stimulation'
+  },
+  'flow3': {
+    id: 'agent_2801k4hv7keze68tgybjty5qd1v6',
+    title: 'Flow 3: reminders of key actions',
+    description: 'Helpful reminder companion for daily tasks'
+  }
+};
+
+// Get flow parameter from URL or default to flow1
+function getFlowFromURL() {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get('flow') || 'flow1';
+}
+
+// Get current agent configuration
+const currentFlow = getFlowFromURL();
+const agentConfig = AGENT_CONFIGS[currentFlow] || AGENT_CONFIGS['flow1'];
+const AGENT_ID = agentConfig.id;
+
+// Log current configuration
+console.log(`🎯 Loading ${agentConfig.title}`);
+console.log(`🤖 Agent ID: ${AGENT_ID}`);
 
 // OPTIONAL: Change navigation behavior
 const OPEN_IN_NEW_TAB = true; // true = new tab, false = same tab
@@ -387,23 +418,45 @@ function testTranscript() {
 // Make testTranscript available globally for debugging
 window.testTranscript = testTranscript;
 
+// Update page title and header based on current flow
+function updatePageContent() {
+  // Update page title
+  document.title = `${agentConfig.title} - Vesta AI`;
+  
+  // Update page header if it exists
+  const pageTitle = document.querySelector('.page-title');
+  if (pageTitle) {
+    pageTitle.textContent = agentConfig.title;
+  }
+  
+  // Update loading message to be flow-specific
+  const loadingMessage = document.querySelector('.widget-loading p');
+  if (loadingMessage) {
+    loadingMessage.textContent = `Loading ${agentConfig.title}...`;
+  }
+  
+  console.log(`📝 Updated page content for: ${agentConfig.title}`);
+}
+
 // Initialize when DOM is ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
+    updatePageContent();
     injectElevenLabsWidget();
     initializeClearButtons();
     // Add initial test transcript to verify functionality
     setTimeout(() => {
-      addTranscriptEntry('system', 'Widget loaded successfully. Ready for conversation.');
-      addActivityEntry('INIT', 'Transcript system initialized');
+      addTranscriptEntry('system', `${agentConfig.title} loaded successfully. Ready for conversation.`);
+      addActivityEntry('INIT', `${currentFlow.toUpperCase()} agent initialized`);
     }, 1000);
   });
 } else {
+  updatePageContent();
   injectElevenLabsWidget();
   initializeClearButtons();
   // Add initial test transcript to verify functionality
   setTimeout(() => {
-    addTranscriptEntry('system', 'Widget loaded successfully. Ready for conversation.');
-    addActivityEntry('INIT', 'Transcript system initialized');
+    addTranscriptEntry('system', `${agentConfig.title} loaded successfully. Ready for conversation.`);
+    addActivityEntry('INIT', `${currentFlow.toUpperCase()} agent initialized`);
   }, 1000);
 }
