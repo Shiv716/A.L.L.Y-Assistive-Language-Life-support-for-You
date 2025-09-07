@@ -13,7 +13,7 @@ const AGENT_CONFIGS = {
     description: 'Energetic morning companion to start the day'
   },
   'flow2': {
-    id: 'agent_0201k4f0z28heg7t3zs2yw3mqbqv',
+    id: 'agent_7801k4hv6g22f9yt58eg2dcw6myb',
     title: 'Flow 2: keeping user mentally engaged',
     description: 'Engaging companion for mental stimulation'
   },
