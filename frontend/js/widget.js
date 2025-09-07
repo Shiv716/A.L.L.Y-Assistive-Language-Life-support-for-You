@@ -27,17 +27,24 @@ const AGENT_CONFIGS = {
 // Get flow parameter from URL or default to flow1
 function getFlowFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get('flow') || 'flow1';
+  const flow = urlParams.get('flow') || 'flow1';
+  console.log(`🔍 URL Search: ${window.location.search}`);
+  console.log(`🔍 Flow parameter: ${flow}`);
+  return flow;
 }
 
 // Get current agent configuration
 const currentFlow = getFlowFromURL();
+console.log(`🔍 Current flow: ${currentFlow}`);
+console.log(`🔍 Available configs:`, Object.keys(AGENT_CONFIGS));
+
 const agentConfig = AGENT_CONFIGS[currentFlow] || AGENT_CONFIGS['flow1'];
 const AGENT_ID = agentConfig.id;
 
 // Log current configuration
 console.log(`🎯 Loading ${agentConfig.title}`);
 console.log(`🤖 Agent ID: ${AGENT_ID}`);
+console.log(`🔍 Agent config:`, agentConfig);
 
 // OPTIONAL: Change navigation behavior
 const OPEN_IN_NEW_TAB = true; // true = new tab, false = same tab
@@ -420,27 +427,42 @@ window.testTranscript = testTranscript;
 
 // Update page title and header based on current flow
 function updatePageContent() {
+  console.log(`🔧 updatePageContent called with agentConfig:`, agentConfig);
+  
   // Update page title
   document.title = `${agentConfig.title} - Vesta AI`;
+  console.log(`🔧 Document title set to: ${document.title}`);
   
   // Update page header if it exists
   const pageTitle = document.querySelector('.page-title');
+  console.log(`🔧 Page title element found:`, pageTitle);
   if (pageTitle) {
+    console.log(`🔧 Current page title text: "${pageTitle.textContent}"`);
     pageTitle.textContent = agentConfig.title;
+    console.log(`🔧 New page title text: "${pageTitle.textContent}"`);
+  } else {
+    console.error(`❌ .page-title element not found!`);
   }
   
   // Update loading message to be flow-specific
   const loadingMessage = document.querySelector('.widget-loading p');
   if (loadingMessage) {
     loadingMessage.textContent = `Loading ${agentConfig.title}...`;
+    console.log(`🔧 Loading message updated to: "${loadingMessage.textContent}"`);
   }
   
   console.log(`📝 Updated page content for: ${agentConfig.title}`);
 }
 
+// Simple immediate execution to update title
+console.log('🚀 Starting title update immediately...');
+updatePageContent();
+
 // Initialize when DOM is ready
 if (document.readyState === 'loading') {
+  console.log('📋 DOM loading - adding event listener');
   document.addEventListener('DOMContentLoaded', () => {
+    console.log('📋 DOM loaded - running initialization');
     updatePageContent();
     injectElevenLabsWidget();
     initializeClearButtons();
@@ -451,6 +473,7 @@ if (document.readyState === 'loading') {
     }, 1000);
   });
 } else {
+  console.log('📋 DOM already ready - running initialization immediately');
   updatePageContent();
   injectElevenLabsWidget();
   initializeClearButtons();

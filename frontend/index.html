@@ -107,6 +107,53 @@
         </div>
     </div>
 
-    <script src="js/widget.js"></script>
+    <script>
+        // Immediate title update based on URL parameter
+        (function() {
+            const AGENT_CONFIGS = {
+              'flow1': {
+                id: 'agent_7401k4g1r9m7fsh9xpg0a5zn8h1w',
+                title: 'Flow 1: energetic good morning',
+                description: 'Energetic morning companion to start the day'
+              },
+              'flow2': {
+                id: 'agent_0201k4f0z28heg7t3zs2yw3mqbqv',
+                title: 'Flow 2: keeping user mentally engaged',
+                description: 'Engaging companion for mental stimulation'
+              },
+              'flow3': {
+                id: 'agent_2801k4hv7keze68tgybjty5qd1v6',
+                title: 'Flow 3: reminders of key actions',
+                description: 'Helpful reminder companion for daily tasks'
+              }
+            };
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const flow = urlParams.get('flow') || 'flow1';
+            const agentConfig = AGENT_CONFIGS[flow] || AGENT_CONFIGS['flow1'];
+            
+            // Update document title immediately
+            document.title = `${agentConfig.title} - Vesta AI`;
+            
+            // Update page title when DOM is ready
+            function updateTitle() {
+                const pageTitle = document.querySelector('.page-title');
+                if (pageTitle) {
+                    pageTitle.textContent = agentConfig.title;
+                    console.log(`✅ Title updated to: ${agentConfig.title}`);
+                } else {
+                    // Try again after a short delay
+                    setTimeout(updateTitle, 50);
+                }
+            }
+            
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', updateTitle);
+            } else {
+                updateTitle();
+            }
+        })();
+    </script>
+    <script src="js/widget.js?v=3"></script>
 </body>
 </html>
