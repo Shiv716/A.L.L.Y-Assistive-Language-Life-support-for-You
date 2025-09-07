@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ALLY — Onboarding</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/onboarding.css">
+  </head>
+  <body>
+    <main class="onboarding">
+      <header class="onboarding__header" role="banner">
+        <h1>Welcome to ALLY</h1>
+        <p class="subtitle">Let’s tailor your companion to you. This takes about 5–8 minutes.</p>
+      </header>
+
+      <div class="loadingbar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Onboarding progress">
+        <div class="loadingbar__track">
+          <div class="loadingbar__value" id="progressBarValue"></div>
+        </div>
+      </div>
+
+      <nav class="progress" aria-label="Onboarding progress">
+        <ol class="progress__steps" id="progressSteps">
+          <li class="is-active">Profile</li>
+          <li>Safety</li>
+          <li>Accessibility</li>
+          <li>Preferences</li>
+          <li>Privacy</li>
+          <li>Review</li>
+        </ol>
+      </nav>
+
+      <form id="onboardingForm" novalidate>
+        <!-- Step 1: Basic Profile & Personalisation -->
+        <section class="step is-visible" data-step="1" aria-labelledby="step1-title">
+          <h2 id="step1-title">Basic Profile & Personalisation</h2>
+          <div class="grid two">
+            <label class="field">
+              <span>Preferred name</span>
+              <input type="text" name="profile.preferredName" autocomplete="name" required>
+              <small class="hint">How should we address you? e.g., Evelyn or Mr. Khan</small>
+            </label>
+
+            <label class="field">
+              <span>Pronouns</span>
+              <select name="profile.pronouns">
+                <option value="">Choose…</option>
+                <option>she/her</option>
+                <option>he/him</option>
+                <option>they/them</option>
+                <option>prefer not to say</option>
+                <option>custom</option>
+              </select>
+            </label>
+
+          </div>
+
+          <label class="field">
+            <span>Interests & hobbies</span>
+            <input type="text" name="profile.interests" placeholder="e.g., gardening, 60s music, cricket" aria-describedby="interests-hint">
+            <small id="interests-hint" class="hint">Comma-separated. We’ll use these to personalise chats.</small>
+          </label>
+
+          <label class="field">
+            <span>Life history anchors</span>
+            <textarea name="profile.lifeHistory" rows="3" placeholder="Family, pets, important places, achievements"></textarea>
+          </label>
+
+          <fieldset class="fieldset">
+            <legend>Daily routines</legend>
+            <div class="grid two">
+              <label class="field">
+                <span>Wake-up time</span>
+                <input type="time" name="routines.wakeUp">
+              </label>
+
+              <label class="field">
+                <span>Bedtime</span>
+                <input type="time" name="routines.bedTime">
+              </label>
+
+              <label class="field">
+                <span>Breakfast time</span>
+                <input type="time" name="routines.breakfast">
+              </label>
+
+              <label class="field">
+                <span>Lunch time</span>
+                <input type="time" name="routines.lunch">
+              </label>
+
+              <label class="field">
+                <span>Dinner time</span>
+                <input type="time" name="routines.dinner">
+              </label>
+
+              <label class="field">
+                <span>Nap time (optional)</span>
+                <input type="time" name="routines.nap">
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend>Languages & hearing</legend>
+            <div class="grid two">
+              <label class="field">
+                <span>Languages & dialects</span>
+                <input type="text" name="profile.languages" placeholder="e.g., English (Yorkshire), Urdu">
+              </label>
+              <label class="field">
+                <span>Speech/hearing notes</span>
+                <input type="text" name="profile.speechHearing" placeholder="e.g., mild hearing loss in left ear">
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="nav">
+            <button type="button" class="btn next">Next</button>
+          </div>
+        </section>
+
+        <!-- Step 2: Safety & Emergency Info -->
+        <section class="step" data-step="2" aria-labelledby="step2-title">
+          <h2 id="step2-title">Safety & Emergency Info</h2>
+          <div class="repeater" data-repeater="contacts">
+            <div class="repeater__head">
+              <h3>Emergency contacts</h3>
+              <button type="button" class="btn ghost" data-action="add-contact">Add contact</button>
+            </div>
+            <div class="repeater__list" id="contactsList" aria-live="polite"></div>
+            <small class="hint">Add at least one contact with a phone number.</small>
+          </div>
+
+          <label class="field">
+            <span>Medical conditions</span>
+            <textarea name="safety.medicalConditions" rows="3" placeholder="e.g., diabetes, heart condition (only what’s needed for safety)"></textarea>
+          </label>
+
+          <div class="repeater" data-repeater="medications">
+            <div class="repeater__head">
+              <h3>Medications & reminders (optional)</h3>
+              <button type="button" class="btn ghost" data-action="add-medication">Add medication</button>
+            </div>
+            <div class="repeater__list" id="medicationsList" aria-live="polite"></div>
+          </div>
+
+
+          <div class="nav">
+            <button type="button" class="btn prev">Back</button>
+            <button type="button" class="btn next">Next</button>
+          </div>
+        </section>
+
+        <!-- Step 3: Accessibility & Ease of Use -->
+        <section class="step" data-step="3" aria-labelledby="step3-title">
+          <h2 id="step3-title">Accessibility & Ease of Use</h2>
+          <label class="field">
+            <span>Wake word preference</span>
+            <input type="text" name="access.wakeWord" placeholder="e.g., Hey Friend">
+          </label>
+
+          <fieldset class="fieldset">
+            <legend>Speech clarity adjustments</legend>
+            <label class="choice inline"><input type="checkbox" name="access.speech.slower"> Slower speech</label>
+            <label class="choice inline"><input type="checkbox" name="access.speech.simpler"> Simpler language</label>
+            <label class="choice inline"><input type="checkbox" name="access.speech.louder"> Louder voice output</label>
+          </fieldset>
+
+          
+
+          <div class="nav">
+            <button type="button" class="btn prev">Back</button>
+            <button type="button" class="btn next">Next</button>
+          </div>
+        </section>
+
+        <!-- Step 4: Emotional & Social Preferences -->
+        <section class="step" data-step="4" aria-labelledby="step4-title">
+          <h2 id="step4-title">Emotional & Social Preferences</h2>
+
+          <label class="field">
+            <span>Off-limit topics</span>
+            <input type="text" name="prefs.offLimits" placeholder="e.g., politics, traumatic events">
+          </label>
+
+          <label class="field">
+            <span>Frequency of check-ins</span>
+            <select name="prefs.checkinFrequency">
+              <option value="">Choose…</option>
+              <option>Morning and evening</option>
+              <option>Once daily</option>
+              <option>Twice daily</option>
+              <option>Multiple times per day</option>
+            </select>
+          </label>
+
+          
+
+          <div class="nav">
+            <button type="button" class="btn prev">Back</button>
+            <button type="button" class="btn next">Next</button>
+          </div>
+        </section>
+
+        
+      </form>
+
+      <p class="trust-inline"><strong>We use this data only to make your loved one’s experience personal and comforting. You’ll be notified only if they truly need help—nothing else is shared.</strong></p>
+
+      <footer class="onboarding__footer" role="contentinfo">
+        <p>By continuing you agree to our privacy policy and terms.</p>
+      </footer>
+    </main>
+
+    <script src="js/onboarding.js"></script>
+  </body>
+  </html>
+
+

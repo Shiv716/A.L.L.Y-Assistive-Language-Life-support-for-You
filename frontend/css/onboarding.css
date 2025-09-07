@@ -1,0 +1,124 @@
+/* CompanionCare Onboarding Styles */
+:root {
+  --bg: #ffffff;
+  --text: #000000;
+  --accent: #61459e; /* purple */
+  --border: rgba(0,0,0,0.12);
+  --muted: rgba(0,0,0,0.6);
+  --focus: rgba(97,69,158,0.35);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.onboarding { 
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+
+.onboarding__header { text-align: center; margin-bottom: 20px; }
+.onboarding__header h1 { margin: 0 0 6px; font-weight: 700; letter-spacing: 0.2px; }
+.onboarding__header .subtitle { margin: 0; color: var(--muted); }
+
+.progress { display: none; }
+.progress__steps { list-style: none; display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin: 12px 0 20px; padding: 8px 0; }
+.progress__steps li {
+  text-align: center; font-size: 13px; color: var(--muted); padding: 8px 10px; border: 1px solid var(--border);
+  border-radius: 999px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: #fff;
+}
+.progress__steps li.is-active { color: var(--text); border-color: var(--accent); box-shadow: 0 0 0 2px var(--focus) inset; }
+
+form { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+
+.step { display: none; }
+.step.is-visible { display: block; animation: fadeIn 200ms ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Single-question flow */
+.questions { position: relative; min-height: 220px; transition: height 240ms ease; }
+.question { position: absolute; inset: 0; opacity: 0; transform: translateX(16px); pointer-events: none; transition: opacity 220ms ease, transform 260ms ease; }
+.question.is-active { opacity: 1; transform: translateX(0); pointer-events: auto; }
+.question.exit-left { opacity: 0; transform: translateX(-16px); }
+.question.exit-right { opacity: 0; transform: translateX(16px); }
+.question.measure { position: static !important; opacity: 0 !important; transform: none !important; pointer-events: none !important; }
+
+/* Ensure nav stays outside content and visible */
+.nav { position: static; background: transparent; padding-top: 10px; margin-top: 12px; }
+
+h2 { margin: 6px 0 14px; font-size: 24px; }
+h3 { margin: 10px 0; font-size: 18px; }
+.muted { color: var(--muted); }
+
+.grid { display: grid; gap: 30px; }
+.grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 720px) { .grid.two { grid-template-columns: 1fr; } }
+.grid.two { row-gap: 40px; }          /* keeps column spacing smaller */
+
+
+.field { display: grid; gap: 30px; }
+.field > span { font-weight: 600; }
+.hint { color: var(--muted); font-size: 12px; }
+
+input[type="text"], input[type="time"], input[type="tel"], input[type="email"], select, textarea {
+  width: 100%;
+  background: #fff;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  outline: none;
+}
+textarea { resize: vertical; }
+input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--focus); }
+input:invalid, select:invalid, textarea:invalid { border-color: rgba(0,0,0,0.35); }
+
+.fieldset { border: 1px dashed var(--border); border-radius: 12px; padding: 12px; margin: 12px 0; }
+.fieldset > legend { padding: 0 6px; color: var(--muted); }
+
+.choice { display: block; margin: 8px 0; }
+.choice.inline { display: inline-flex; align-items: center; margin-right: 16px; }
+
+.repeater { margin: 12px 0; }
+.repeater__head { display: flex; align-items: center; justify-content: space-between; }
+.repeater__item { border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin: 10px 0; background: #fff; }
+.repeater__row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 720px) { .repeater__row { grid-template-columns: 1fr; } }
+.repeater[data-repeater="contacts"] .repeater__row + .repeater__row { margin-top: 40px; }
+.repeater[data-repeater="medications"] .repeater__row + .repeater__row { margin-top: 40px; }
+.repeater__actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px; }
+
+.nav { display: flex; justify-content: space-between; margin-top: 18px; }
+.review { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 12px; }
+.review__actions { display: flex; gap: 10px; margin: 12px 0; }
+
+.btn { appearance: none; border: 1px solid var(--border); color: var(--text); background: #fff; padding: 10px 14px; border-radius: 10px; cursor: pointer; }
+.btn:hover { box-shadow: 0 0 0 2px var(--focus); }
+.btn.primary { background: var(--accent); border: 1px solid var(--accent); color: #fff; }
+.btn.ghost { background: #fff; color: var(--accent); border-color: var(--accent); }
+.btn.danger { background: #fff; border-color: rgba(0,0,0,0.3); color: var(--text); }
+
+.onboarding__footer { color: var(--muted); text-align: center; margin-top: 14px; font-size: 12px; }
+
+/* Minimal header underline accent */
+.onboarding__header h1 { border-bottom: 3px solid var(--accent); display: inline-block; padding-bottom: 4px; }
+
+/* Trust note */
+.trust-note { display: none; }
+.trust-inline { margin: 18px 0 0; text-align: center; font-weight: 800; font-family: Manrope, Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+
+/* Loading bar */
+.loadingbar { margin: 12px 0 18px; }
+.loadingbar__track { width: 100%; height: 8px; background: rgba(0,0,0,0.08); border-radius: 999px; overflow: hidden; }
+.loadingbar__value { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), #8b6cc7); border-radius: 999px; transition: width 320ms cubic-bezier(0.22, 1, 0.36, 1), filter 200ms ease; box-shadow: 0 0 0 1px rgba(0,0,0,0.04) inset; }
+.loadingbar__value.is-animated { animation: shimmer 1.6s linear infinite; }
+@keyframes shimmer { 0% { filter: brightness(1); } 50% { filter: brightness(1.1); } 100% { filter: brightness(1); } }
+
+
+
